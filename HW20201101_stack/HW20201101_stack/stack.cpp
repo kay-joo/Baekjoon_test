@@ -4,7 +4,8 @@ using namespace std;
 
 class stack {
 	int *comlinecnt;
-	int stackpointer=0;
+	int stackpointer=-1;
+	int move;
 public:
 	int stacksize;
 	stack(int cnt);
@@ -34,12 +35,139 @@ stack::~stack() {
 
 int stack::select() {
 	string select;
+	char ex;
+	int temp;
+	int sum = 0;
 	do {
 	cout << "명령어를 입력하세요 : ";
 	getline(cin, select);
 		switch (select[0]) {//문자열의 첫번째 글자만을 가지고도,push와 pop을 제외하고 명령어 구분이 가능함
 		case 'p':
 			if (select[1] == 'u') {//두번째 글자가 push의 u이면 push
+				switch (select.size()) {
+				case 6:	ex = select[5];
+						sum = ex - '0';
+						this->move = sum;
+						break;
+				case 7: ex = select[5];
+						temp = ex - '0';
+						temp *= 10;
+						sum += temp;
+						ex = select[6];
+						temp = ex - '0';
+						sum += temp;
+						this->move = sum;
+						break;
+				case 8: ex = select[5];
+					temp = ex - '0';
+					temp *= 100;
+					sum += temp;
+					ex = select[6];
+					temp = ex - '0';
+					temp *= 10;
+					sum += temp;
+					ex = select[7];
+					temp = ex - '0';
+					sum += temp;
+					this->move = sum;
+					break;
+				case 9: ex = select[5];
+					temp = ex - '0';
+					temp *= 1000;
+					sum += temp;
+					ex = select[6];
+					temp = ex - '0';
+					temp *= 100;
+					sum += temp;
+					ex = select[7];
+					temp = ex - '0';
+					temp *= 10;
+					sum += temp;
+					ex = select[8];
+					temp = ex - '0';
+					temp *= 1;
+					sum += temp;
+					this->move = sum;
+					break;
+				case 10: ex = select[5];
+					temp = ex - '0';
+					temp *= 10000;
+					sum += temp;
+					ex = select[6];
+					temp = ex - '0';
+					temp *= 1000;
+					sum += temp;
+					ex = select[7];
+					temp = ex - '0';
+					temp *= 100;
+					sum += temp;
+					ex = select[8];
+					temp = ex - '0';
+					temp *= 10;
+					sum += temp;
+					ex = select[9];
+					temp = ex - '0';
+					temp *= 1;
+					sum += temp;
+					this->move = sum;
+					break;
+				case 11: ex = select[5];
+					temp = ex - '0';
+					temp *= 100000;
+					sum += temp;
+					ex = select[6];
+					temp = ex - '0';
+					temp *= 10000;
+					sum += temp;
+					ex = select[7];
+					temp = ex - '0';
+					temp *= 1000;
+					sum += temp;
+					ex = select[8];
+					temp = ex - '0';
+					temp *= 100;
+					sum += temp;
+					ex = select[9];
+					temp = ex - '0';
+					temp *= 10;
+					sum += temp;
+					ex = select[10];
+					temp = ex - '0';
+					temp *= 1;
+					sum += temp;
+					this->move = sum;
+					break;
+				case 12: ex = select[5];
+					temp = ex - '0';
+					temp *= 1000000;
+					sum += temp;
+					ex = select[6];
+					temp = ex - '0';
+					temp *= 100000;
+					sum += temp;
+					ex = select[7];
+					temp = ex - '0';
+					temp *= 10000;
+					sum += temp;
+					ex = select[8];
+					temp = ex - '0';
+					temp *= 1000;
+					sum += temp;
+					ex = select[9];
+					temp = ex - '0';
+					temp *= 100;
+					sum += temp;
+					ex = select[10];
+					temp = ex - '0';
+					temp *= 10;
+					sum += temp;
+					ex = select[11];
+					temp = ex - '0';
+					temp *= 1;
+					sum += temp;
+					this->move = sum;
+					break;
+				}
 				return 0;//push의 값을 0으로 정하여 반환
 				//문자와 숫자를 분리하여 따로 값을 저장하여야함
 			}
@@ -63,23 +191,47 @@ int stack::select() {
 }
 
 void stack::push() {
-	cout << "push" << endl;;
+	//cout << "push" << endl;;
+	cout << move << endl;
+	stackpointer++;
+	comlinecnt[stackpointer] = move;
 }
 
 void stack::pop() {
-	cout << "pop" << endl;;
+	//cout << "pop" << endl;;
+	if (stackpointer == -1) {
+		cout << stackpointer << endl;
+	}
+	else {
+		cout << comlinecnt[stackpointer] << endl;
+		comlinecnt[stackpointer] = 0;
+		stackpointer--;
+	}
 }
 
 void stack::size() {
-	cout << "size" << endl;;
+	//cout << "size" << endl;;
+	cout << stackpointer + 1 << endl;
 }
 
 void stack::empty() {
-	cout << "empty" << endl;;
+	//cout << "empty" << endl;;
+	if (stackpointer == -1) {
+		cout << 1 << endl;
+	}
+	else {
+		cout << 0 << endl;
+	}
 }
 
 void stack::top() {
-	cout << "top" << endl;;
+	//cout << "top" << endl;
+	if (stackpointer == -1) {
+		cout << stackpointer << endl;
+	}
+	else {
+		cout << comlinecnt[stackpointer] << endl;
+	}
 }
 
 int howmanycnt() {//함수선언 및 정의
