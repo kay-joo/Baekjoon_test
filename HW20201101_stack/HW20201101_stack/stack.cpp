@@ -2,13 +2,15 @@
 #include <string>
 using namespace std;
 
+
+
 class stack {
 	int *comlinecnt;
 	int stackpointer=-1;
 	int move;
 public:
 	int stacksize;
-	stack(int cnt);
+	stack(int cnt);//»ı¼ºÀÚ
 	~stack();
 	int select();
 	void push();//0
